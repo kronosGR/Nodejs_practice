@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 
-const getStats = async (path) =>{
+const getStats = async (path) => {
   try {
     const stats = await fs.stat(path)
     console.log(stats)
@@ -11,7 +11,7 @@ const getStats = async (path) =>{
   }
 }
 
-const readFile = async (path)=>{
+const readFile = async (path) => {
   try {
     const contents = await fs.readFile(path, 'utf-8')
     console.log(contents)
@@ -20,5 +20,22 @@ const readFile = async (path)=>{
   }
 }
 
+const writeFile = async (path, data) => {
+  try {
+    await fs.writeFile(path, data)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const appendFile = async (path, data) => {
+  try {
+    await fs.appendFile(path, data)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 // getStats("./test.txt");
 readFile("./test.txt")
+appendFile("./test.txt", "new text")
