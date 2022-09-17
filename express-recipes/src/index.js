@@ -1,9 +1,12 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 
 const recipesRouter = require("./routers/recipes");
 
 const app = express();
+
+app.use(cors());
 
 const port = process.env.PORT || 8000;
 
