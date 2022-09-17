@@ -14,6 +14,10 @@ app.use((req, res, next) => {
   );
 });
 
+// parse json
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/v1/recipes", recipesRouter);
 
 app.listen(port, () => {
