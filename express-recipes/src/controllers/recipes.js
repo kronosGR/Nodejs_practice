@@ -30,7 +30,73 @@ const save = async (req, res, next) => {
   }
 };
 
+const get = async (req, res, next) => {
+  try {
+    const recipe = await service.get(req.params.id);
+    if (recipe === undefined) {
+      const err = new Error("Recipe not found");
+      err.statusCode = 404;
+      throw err;
+    }
+    res.json({ data: recipe });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const update = async (req, res, next) => {
+  try {
+    const recipe = await service.get(req.params.id);
+
+    if (recipe === undefined) {
+      const err = new Error("Recipe not found");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    const {
+      name,
+      healthLabels,
+      cookTimeMinutes,
+      prepTimeMinutes,
+      ingredients,
+    } = req.body;
+
+    const updated = await service.update(req.params.id, {
+      name,
+      healthLabels: [...healthLabels],
+      cookTimeMinutes,
+      prepTimeMinutes,
+      ingredients: [...ingredients],
+    });
+
+    res.json({ data: updated });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    const recipe = await service.get(req.params.id);
+
+    if (recipe === undefined) {
+      const err = new Error("Recipe not found");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    await service.remove(req.params.id);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   save,
+  get,
+  save,
+  update,
+  remove,
 };
