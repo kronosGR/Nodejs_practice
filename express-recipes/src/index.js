@@ -18,6 +18,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.redirect("/api/v1/recipes");
+});
+
 app.use("/api/v1/recipes", recipesRouter);
 
 app.listen(port, () => {
