@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const recipesRouter = require("./routers/recipes");
 const { handleError } = require("./utils/error");
+const auth = require("./middleware/auth");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 // parse json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(auth.initialize);
 
 app.get("/", (req, res) => {
   res.redirect("/api/v1/recipes");
