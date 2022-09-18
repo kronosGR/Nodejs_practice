@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors");
 
 const recipesRouter = require("./routers/recipes");
+const usersRouter = require("./routers/users");
 const { handleError } = require("./utils/error");
 const auth = require("./middleware/auth");
 
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/recipes", recipesRouter);
+app.use("/api/v1/users", usersRouter);
 
 app.use(handleError);
 
