@@ -77,6 +77,21 @@ socket.on("sendMessage", (message, callback) => {
   }
 });
 
+socket.on("getQuestion", async (data, callback) => {
+  const { error, player } = getPlayer(socket.id);
+
+  if (error) return callback(error.message);
+
+  if (player) {
+    // Pass in a callback function to handle the promise that's returned from the API call
+    const game = await setGame();
+    io.to(player.room).emit("question", {
+      playerName: player.playerName,
+      ...game.prompt,
+    });
+  }
+});
+
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.log(`Server is up on port ${port}`);
