@@ -1,4 +1,4 @@
-// send sms with Twillio
+// send sms with Twilio
 const config = require("./config");
 const readLineSync = require("readline-sync");
 const Twilio = require("twilio");
