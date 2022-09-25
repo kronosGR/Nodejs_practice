@@ -1,0 +1,10 @@
+{
+  "FROM_EMAIL": "{{from_email}}",
+  "TO_EMAIL": "{{to_email}}",
+  "HOST": "smtp.gmail.com",
+  "PORT": "465",
+  "AUTH": {
+    "USERNAME": "{{username}}",
+    "PASSWORD": "{{password}}"
+  }
+}
